@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: file-test-pod
+  namespace: dev
+spec:
+  volumes:
+    - name: volume-test
+      persistentVolumeClaim:
+        claimName: pvc-demo-dev
+  containers:
+    - name: file-container
+      image: busybox
+      command: ["sleep", "3600"]
+      volumeMounts:
+        - mountPath: "/data"
+          name: volume-test

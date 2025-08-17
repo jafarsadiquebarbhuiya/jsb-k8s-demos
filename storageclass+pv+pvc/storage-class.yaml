@@ -1,0 +1,40 @@
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: azurefiledemodev
+# provisioner: file.csi.azure.com
+# parameters:
+#   skuName: Standard_LRS
+#   resourceGroup: rg-demo-dev-0  # Your resource group where storage account exists
+#   storageAccount: stdemodevz4p85nen
+#   protocol: smb
+# reclaimPolicy: Delete
+# allowVolumeExpansion: true
+# volumeBindingMode: Immediate
+
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: azurefiledemodev
+# provisioner: file.csi.azure.com
+# parameters:
+#   skuName: Standard_LRS
+#   resourceGroup: rg-demo-dev-0  # Your resource group where storage account exists
+#   storageAccount: stdemodevz4p85nen
+#   protocol: smb
+# reclaimPolicy: Delete
+# allowVolumeExpansion: true
+# volumeBindingMode: Immediate
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azurefiledemodev01
+provisioner: file.csi.azure.com
+parameters:
+  skuName: Standard_LRS
+  location: eastus
+  protocol: smb
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: Immediate

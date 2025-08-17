@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-demo
+  namespace: dev
+  labels:
+    app: env
+    environment: practice
+spec:
+  containers:
+  - name: env-wordpress
+    image: acrdemodev.azurecr.io/wordpress:v1.0.0
+    env:
+    -  name: WORDPRESS_VERSION
+       value: "5.0.0"
+    -  name: WORDPRESS_USER
+       value: "ubuntu"

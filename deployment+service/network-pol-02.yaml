@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: deploy-networkpolicy
+  namespace: dev
+  labels: 
+    policy: network
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      policy: network
+  template:
+    metadata:
+      labels:
+        policy: network
+    spec:
+      containers:
+      - name: network-policy
+        image: nginx:1.14.2
+        ports:
+        -  containerPort: 8080
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: svc-nodeport
+  namespace: dev
+spec:
+  type: NodePort
+  selector:
+      policy: network
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-clusterip
+  namespace: dev
+spec:
+  type: ClusterIP
+  selector:
+    policy: network
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: svc-loadbalancer
+  namespace: dev
+  # annotations:
+  #   service.beta.kubernetes.io/azure-load-balancer-resource-group: MC_rg-demo-dev-0_aks-demo-dev_eastus
+spec:
+  type: LoadBalancer 
+  selector:
+    policy: network
+  ports:
+    - port: 80
+      targetPort: 8080
+    

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mongo-express-ingress
+  namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: "106.215.137.36/32"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:  
+            name: mongoexpress-svc
+            port:
+              number: 8081
