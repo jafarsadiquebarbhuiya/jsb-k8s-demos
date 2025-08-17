@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: netpol-fe-deploy
+  namespace: dev
+  labels: 
+    app: netpol-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netpol-fe
+  template:
+    metadata:
+      labels:
+        app: netpol-fe
+    spec:
+      containers:
+      - name: container-fe
+        image: nginx:1.14.2
+        ports:
+        -  containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netpol-be-deploy
+  namespace: dev
+  labels:
+    app: netpol-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netpol-be
+  template:
+    metadata:
+      labels:
+        app: netpol-be
+    spec:
+      containers:
+      - name: container-be
+        image: nginx:1.14.2
+        ports:
+        -  containerPort: 80
+        
+
+
