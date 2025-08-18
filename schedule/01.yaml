@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-schedule
+  namespace: dev
+  labels:
+    app: nodelable
+spec:
+  nodeName: aks-system-36695703-vmss000000
+  containers:
+  - name: node-schedule
+    image: nginx
+    ports: 
+    - containerPort: 80

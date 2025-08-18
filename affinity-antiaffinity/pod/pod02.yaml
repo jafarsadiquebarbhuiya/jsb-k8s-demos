@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podaffinity-be
+  namespace: dev
+  labels:
+    app: be
+spec:
+  nodeSelector:
+    node: backend
+  containers:
+  - name: podaffinity-be
+    image: nginx
+    ports:
+    - containerPort: 80
+    resources:
+      requests:
+        cpu: 64m
+        memory: 128Mi

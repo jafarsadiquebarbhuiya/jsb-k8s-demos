@@ -1,0 +1,20 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podaffinity-fe
+  namespace: dev
+  labels:
+    app: fe
+spec:
+  nodeSelector:
+    node: frontend
+  containers:
+  - name: podaffinity-fe
+    image: nginx
+    ports:
+    - containerPort: 80
+    resources:
+      requests:
+        cpu: 64m
+        memory: 128Mi
